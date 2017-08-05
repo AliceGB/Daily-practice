@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>div块简单控制</title>
+	<style type="text/css">
+		#buttonDiv button{height: 50px;width: 100px;background-color: #ccc;margin:0 auto;text-align: center;}
+		#theDivBlock{height: 400px;width: 400px;background: #aaa;margin:10px auto;display: block;}
+	</style>
+	<script type="text/javascript">
+	//创建一个函数，在后续onclick事件中直接调用
+		var changeStyle=function(elem,attr,valu){
+			elem.style[attr]=valu
+		};
+
+		window.onload=function(){
+
+			//取得并设置相应的变量，oBtn保存的是一个nodelist集合
+			var oBtn=document.getElementsByTagName("input");
+			var oDiv=document.getElementById("theDivBlock");
+			//问题1：oAtt oVal两个变量的最后一个value其实并没有应用到，试了一下，去掉也没有影响，那么如果真的去掉会造成什么问题吗？
+			var oAtt=["width","height","background","display","display"];
+			var oVal=["500px","500px","green","none","none"];
+
+
+			for(var i=0;i<oBtn.length;i++){
+				oBtn[i].index=i;
+
+				//设置onclick函数，注意onclick中c为小写字母
+				oBtn[i].onclick=function()
+				{
+					//&&操作符的短路用法：如果 && 左边的操作数（表达式）的值相当于false，则不对右边的操作数进行判断，直接返回 false
+					//此处，只有当this.index==oBtn.length-1的值为true时，执行oDiv.style.cssText=""。
+					//但是这种用法不提倡，可等价于
+					//方法二：
+					//if(this.index==oBtn.length-1){
+						//oDiv.style.cssText="";
+						//alert(oDiv.style.cssText);
+					//}else{
+						//changeStyle(oDiv,oAtt[this.index],oVal[this.index]);
+						//alert(oDiv.style.cssText);
+					//}
+					
+					//问题二：oDiv.style.cssText=""这一句怎么实现重置效果？
+					this.index==oBtn.length-1&&(oDiv.style.cssText="");
+
+					changeStyle(oDiv,oAtt[this.index],oVal[this.index]);
+					//此处如果将this.index修改为直接使用i值，会发现按钮点击时无反应
+					//原因：问题出现在闭包上，问题分析如下：
+
+					//1. 我给每个button的onclick动作都绑定了一个function
+
+					//2. 我点击button，就要调用这个function
+
+					//3. 这个function执行到changeSytle，开始寻找参数
+
+					//4. 参数中有变量 i， i 是多少？
+
+					//5. 先从当前的匿名函数的作用域找 i，没有找到
+
+					//6. 接着到window.onload 绑定的匿名函数去找（注意javascript里面没有块级作用域概念），找到 i
+
+					//7. i 是多少？ i = oBtn.length，因为 window.onload 绑定的匿名函数返回后， 变量 i 的值是 oBtn.length
+
+					//8. 这正是onclick绑定的匿名函数的作用域链中保存的 i 引用的值
+				}
+			}
+		};
+			
+	</script>
+</head>
+<body>
+	<div id="buttonDiv">
+		<input type="button" value="变宽" />
+		<input type="button" value="变高" />
+		<input type="button" value="改变背景" />
+		<input type="button" value="隐藏" />
+		<input type="button" value="重置" />
+	</div>
+	<div id="theDivBlock"></div>
+
+</body>
+</html>
+
+<!--问题1：oAtt oVal两个变量的最后一个value其实并没有应用到，试了一下，去掉也没有影响，那么如果真的去掉会造成什么问题吗？
+问题二：oDiv.style.cssText=""这一句怎么实现重置效果？-->
