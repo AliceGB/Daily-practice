@@ -1,0 +1,14 @@
+#outer{
+	background-color: #98FB98;
+}
+
+#nav li{
+	background-color: #32CD32;
+}
+
+#green{
+	background: white;
+	border:6px solid green;
+	width:8px;
+	height: 8px;
+}

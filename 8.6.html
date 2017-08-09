@@ -13,6 +13,7 @@
 			elem.style[attr]=valu
 		};
 
+		//window.onload--文档内容全部加载后执行里面的语句
 		window.onload=function(){
 
 			//取得并设置相应的变量，oBtn保存的是一个nodelist集合
@@ -82,5 +83,6 @@
 </body>
 </html>
 
+<!--功能：控制div属性-->
 <!--问题1：oAtt oVal两个变量的最后一个value其实并没有应用到，试了一下，去掉也没有影响，那么如果真的去掉会造成什么问题吗？
 问题二：oDiv.style.cssText=""这一句怎么实现重置效果？-->

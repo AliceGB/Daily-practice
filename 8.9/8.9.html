@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>网页换肤</title>
+	<style type="text/css">
+		body,ul,li{list-style: none;padding: 0px;margin:0px;}/*清除默认样式*/
+		html,body{margin:0;height: 100%}
+		a:link,a:visited{text-decoration: none;}/*清除a标签的默认样式*/
+
+		#outer{width:100%;height:100%;margin:0 auto;}
+
+		#chooseStyle{width:150px;margin:0 auto;}
+		#chooseStyle li{margin:10px;float: left;}
+		#red{background: red;width:20px;height: 20px;}
+		#green{background: green;width: 20px;height: 20px;}
+		#yellow{background: yellow;width: 20px;height: 20px;}
+
+		#nav{width:612px;margin:0 auto;clear: both;border: 1px solid white}
+		#nav li{width: 100px;height: 30px;line-height:30px;float: left;border: 1px solid white;text-align: center;}
+		#nav li a{font-size: 16px;color: white;cursor: pointer;}
+		#nav li a:hover{text-decoration: underline;}
+
+	</style>
+
+	<link rel="stylesheet" type="text/css" href="red.css">
+
+	<script type="text/javascript">
+		window.onload=function(){
+
+			//取得chooseStyle下所有的id，保存在nodelist中
+			var oChoose=document.getElementById("chooseStyle").getElementsByTagName("li");
+			//取得link元素，最后的[0]是保证在页面中有多个link元素时只取第一个link
+			var oLink=document.getElementsByTagName("link")[0];
+
+			for (var i=0;i<oChoose.length;i++)
+			{
+				oChoose[i].onclick=function()
+				{
+					//for-in语句是精准的迭代语句，可用来枚举对象的属性，默认的oChoose是一个HTMLCollection[li,li,li.current]
+					//这两句实现的效果是点击一个li，会自动给该li元素添加class属性，同时释放掉之前的li元素的class
+					//将当前被点击的那个<li>的class设置为current，达到动态更改标签样式的目的
+					for(var p in oChoose) oChoose[p].className="";
+					this.className="current";
+
+					//更改link的href属性，达到网页换肤目的
+					oLink['href']=this.id+".css";
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="outer">
+		<ul id="chooseStyle">
+			<li id="red"></li>
+			<li id="green"></li>
+			<li id="yellow"></li>
+		</ul>
+		<ul id="nav">
+			<li><a href="">微信</a></li>
+			<li><a href="">QQ</a></li>
+			<li><a href="">微博</a></li>
+			<li><a href="">支付宝</a></li>
+			<li><a href="">美团</a></li>
+			<li><a href="">视频</a></li>
+		</ul>		
+	</div>
+</body>
+</html>
+
+<!--功能：实现网页换肤效果，主要是通过改变外部链接link的href属性实现-->

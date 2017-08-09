@@ -1,0 +1,14 @@
+#outer{
+	background-color: #FFFF66;
+}
+
+#nav li{
+	background-color: #FFA500;
+}
+
+#yellow{
+	background: white;
+	border:6px solid #FFA500;
+	width:8px;
+	height: 8px;
+}

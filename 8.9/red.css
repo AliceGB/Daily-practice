@@ -1,0 +1,14 @@
+#red{
+	background: white;
+	border:6px solid red;
+	width:8px;
+	height: 8px;
+}
+
+#nav li{
+	background-color: red;
+}
+
+#outer{
+	background-color: #FFB6C1;
+}
