@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>用循环实现改变div块颜色</title>
+
+	<style type="text/css">
+		body{text-align: center;}
+		#divBlock{width: 360px;margin:0 auto;}
+		#divBlock div{width: 100px;height: 100px;float: left;background-color: black;margin:10px;}
+	</style>
+
+	<script type="text/javascript">
+		window.onload=function()
+		{
+			var oColor=["red","green","yellow"];
+			var oBtn=document.getElementsByTagName("button")[0];
+			var oBtn2=document.getElementsByTagName("button")[1];
+			var oDiv=document.getElementById("divBlock").getElementsByTagName("div");
+			
+			oBtn.onclick=function()
+			{
+				for(var i=0;i<oDiv.length;i++){
+					oDiv[i].style.backgroundColor=oColor[i];
+				}
+			}
+
+
+			oBtn2.onclick=function(){
+				for(var i=0;i<oDiv.length;i++){
+					oDiv[i].style.backgroundColor="black";
+				}
+			}
+		}
+		
+	</script>
+</head>
+<body>
+	<p>
+		<button>点击改变颜色</button>
+		<button>重置</button>
+	</p>
+	<div id="divBlock">
+		<div id="div1"></div>
+		<div id="div2"></div>
+		<div id="div3"></div>
+	</div>
+</body>
+</html>
+
+<!--用循环实现改变三个div块颜色，重置按钮实现重置-->
+<!--问题1：怎么实现让三个div按照一定时间间隔慢慢变化？-->

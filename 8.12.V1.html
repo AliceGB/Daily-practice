@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>接受参数并传出</title>
+
+	<style type="text/css">
+		body{text-align: center;}
+		input{margin-bottom: 8px;}
+		/*#submit{cursor: pointer;}*/
+		button{cursor: pointer;}
+	</style>
+
+	<script type="text/javascript">
+		window.onload=function(){
+			//var oSubmit=document.getElementById("submit");
+			var oSubmit=document.getElementsByTagName("button")[0];
+			var oValue=document.getElementsByTagName("input");
+
+			oSubmit.onclick=function(){
+				for(var i=0;i<oValue.length;i++){
+					alert(oValue[i].value);
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" name="city" value="电影心理罪"><br>
+	<input type="text" name="area" value="很精彩！！！"><br>
+	<!--<input type="button" name="submit" value="传参" id="submit">-->
+	<button type="button">传参</button>
+</body>
+</html>
+
+<!--取得输入框内容，当点击按钮时将内容传出-->
+<!--疑问点1：文档中只有一个button，但如果没有在onclick函数中指明oSubmit[0]或者在DOM操作中加[0]，传参功能无法实现，为什么呢？-->
