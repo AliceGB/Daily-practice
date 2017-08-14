@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>记住密码提示框</title>
+	<style type="text/css">
+		#div0{width: 200px;margin:5px auto;}
+		#div1{width:250px;padding:5px;margin:5px;background-color: #FFFF99;border: 1px solid #66CC33;display: none;}
+	</style>
+	
+	<script type="text/javascript">
+		window.onload=function(){
+
+			var oDiv=document.getElementById("div1");
+			var oCon=document.getElementsByTagName("p")[0];
+
+			oCon.onmouseover=function(){
+				oDiv.style.display="block";
+			}
+
+			oCon.onmouseout=function(){
+				oDiv.style.display="none";
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="div0">
+		<p>
+			<input type="checkbox" />
+			两周内自动登录
+		</p>
+		<div id="div1">
+			为了您的信息安全，请不要在网吧或者公共电脑上使用此功能！
+		</div>
+	</div>
+</body>
+</html>
+
+<!--密码提示框，鼠标移上时出现提示文字-->
+<!--例子中实现提示框与选择框对齐，是通过使div块居中，不适用一般情况。我自己的解决方案是通过position：relative；和position：absolute实现相对位置-->

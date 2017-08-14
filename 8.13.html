@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>鼠标移入移出改变样式</title>
+
+	<style type="text/css">
+		#div1{width:200px;height: 200px;background-color: black;margin:0 auto;font-size: 14px;color:white;padding:20px;cursor: pointer;}
+		#div1.hover{border: 6px solid #CCCCFF;width: 188px;height: 188px;background-color: #FF99CC;}
+	</style>
+
+	
+</head>
+<body>
+	<div id="div1" >鼠标移入改变样式，鼠标移出恢复。</div>
+	<script type="text/javascript">
+
+		window.onload=function()
+		{
+			var oDiv=document.getElementById("div1");
+
+			oDiv.onmouseover=function(){
+				oDiv.className="hover"
+			};
+
+			oDiv.onmouseout=function(){
+				oDiv.className=""
+			}
+		}
+		
+	</script>
+</body>
+
+</html>
+
+<!--通过鼠标移入时给div块添加classname，实现鼠标移入移出时样式变化-->
