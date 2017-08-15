@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>百度输入法</title>
+
+	<style type="text/css">
+		a,ul,li{text-decoration: none;list-style: none;margin:0px;padding:0px;}
+
+		#div0{width: 60px;margin:5px auto;}
+		#oUl{display: none;}
+		ul{margin-top: 5px;border: 1px solid #3333FF;line-height: 1.5em;}
+		ul li{text-align: center;font-size: 14px;color: #3333FF;}
+		#close{border-top: 1px solid #3333FF;}
+		ul li:hover{cursor: pointer;background-color: #99CCCC}
+	</style>
+
+	<script type="text/javascript">
+		window.onload=function()
+		{
+			var oBtn=document.getElementsByTagName("button")[0];
+			var oClo=document.getElementById("close");
+			var oOUl=document.getElementById("oUl");
+
+			oBtn.onclick=function(){
+				oOUl.style.display=oOUl.style.display=="block"?"none":"block";	
+			}
+
+			oClo.onclick=function(){
+				oOUl.style.display="none";
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="div0">
+		<button>输入法</button>
+		<ul id="oUl">
+			<li><a href="javascript::">手写</a></li>
+			<li><a href="javascript::">拼音</a></li>
+			<li id="close"><a href="javascript::">关闭</a></li>
+		</ul>
+	</div>
+</body>
+</html>
+
+<!--模仿百度输入法，注意点：赋值用‘=’，判断用‘==’-->

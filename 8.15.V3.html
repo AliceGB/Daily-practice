@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>求出数组中的数字的和与积</title>
+
+	<style type="text/css">
+		#div0{width: 600px;margin:5px auto;}
+		#div0 input{width:300px;height: 25px;margin-top: 10px;margin-bottom: 10px;}
+		span{color: grey;font-size: 12px;}
+		.theNum,.theAlt{font-size: 36px;color:red;}
+	</style>
+
+	<script type="text/javascript">
+		window.onload=function(){
+			var oInt=document.getElementsByTagName("input")[0];
+			var oBtn=document.getElementsByTagName("button")[0];
+			var oAdd=document.getElementsByTagName("strong")[0];
+			var oBtn2=document.getElementsByTagName("button")[1];
+			var oAlt=document.getElementsByTagName("strong")[1];
+
+			//正则表达式规定input输入框的样式
+			//onkeyup事件：键盘按键被松开时发生
+			oInt.onkeyup = function ()
+			{
+				this.value = this.value.replace(/[^(\d)|(,)]/,"")
+			}
+
+			oBtn.onclick=function(){
+				var sum=0;//onclick函数的局部变量
+				var oNums=oInt.value.split(",");
+
+				for(i=0;i<oNums.length;i++)
+				//例子源码是for（var i in oNums);
+				{
+					sum+=parseInt(oNums[i]);//如果此处不加parseInt，分隔得到的数字会被当成string解析，比如输入1，2,3，最后得到的结果是0123；0是因为num的初始值为0.
+				}
+				oAdd.innerHTML=sum;//不能直接赋值给oAdd，得加上innerHTML。
+			}
+
+			oBtn2.onclick=function(){
+				var num=1;
+				var oNums=oInt.value.split(",");
+
+				for(var i in oNums){
+					num*=parseInt(oNums[i]);
+				}
+				oAlt.innerHTML=num;
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="div0">
+		<input type="text" name="inputNum" value="1,2,3,4,5" />
+		<span>输入数字求和，数字之间用半角号“,"分隔</span><br>
+		<button>求和</button>
+		<strong class="theNum"></strong><br>
+		<button>求积</button>
+		<strong class="theAlt"></strong>
+	</div>
+</body>
+</html>
+
+<!--取得输入框数字并求和-->
+<!--问题1：正则表达式的具体意思？试了一下，不满足正则表达式条件会自动被替换为空，前边条件具体意义？？？
+this.value = this.value.replace(/[^(\d)|(,)]/,"")-->
