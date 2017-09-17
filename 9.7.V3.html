@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>理解float属性</title>
+	<style type="text/css">
+		#div1{float:left;width: 200px;background-color: red;top:40px;left: 40px;}
+		#div2{float:right;width: 200px;height: 200px;background-color: yellow;top: 20px;left: 20px;}
+		#div3{width: 200px;height: 200px;background-color: blue;top: 30px;left: 30px;}
+		#div4{float:left;position:relative;top:20px;width: 200px;height: 200px;background-color: grey;}
+		#div5{float:left;width: 200px;height: 200px;background-color: pink;}
+		#div6{clear:both;width: 200px;height: 200px;background-color: green;}
+	</style>
+</head>
+<body>
+	<div id="div1">你好你好你好你好你好你好你好你好你好你好你好你好</div>
+	<div id="div2"></div>
+	<div id="div3"></div>
+	<div id="div4"></div>
+	<div id="div5"></div>
+	<div id="div6"></div>
+</body>
+</html>
+
+<!--回顾html css基础知识之float属性.
+	float属性：浮动，目前最常用于实现网页布局，
+	由div1可得：在设置了float的元素中，top:40px;left: 40px;不起作用；
+
+	只可以对position：absolute、relative、fixed设置偏移量有效，对float元素设置偏移量是无效的。
+
+	使用float最大的一个注意点是：清除浮动，元素浮动会对后面的元素造成影响，其根本原因是：float使元素高度坍塌，例子可参考div1与div3.
+
+	清除浮动的方法：1.clear：both、left、right；
+					2.width：100%（或固定宽度）+overflow：hidden；
+
+	-->
+

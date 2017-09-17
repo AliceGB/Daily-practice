@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>鼠标滑过，改变图片路径</title>
+
+	<style type="text/css">
+		body,div,img{padding: 0;margin: 0;border:0px;clear: both;}
+		body{background-color: black;}
+		#outer{width: 450px;height: 438px;border: 10px solid grey;padding:0 0 6px 6px;margin:35px auto;background-color: white;border-radius:10px;}
+		img{width: 100px;height: 100px;margin:6px 6px 0 0;padding: 0px;border:0px;border-radius:10px;}
+		#screen{width: 334px;height: 317px;float: left;margin:6px 6px 0 0;}
+	</style>
+
+	<script type="text/javascript">
+		window.onload=function()
+		{
+			var oDiv=document.getElementById("outer");
+			var oImg=document.getElementsByTagName("img");
+			var oScr=document.getElementById("screen");
+
+			for(var i=1;i<oImg.length;i++)
+			{
+				oImg[i].index=i;
+
+				oImg[i].onmouseover=function()
+				{	
+					oScr.src=oImg[this.index].src;
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="outer">
+		<img src="image/1.JPG" id="screen">
+		<img src="image/1.JPG">
+		<img src="image/2.JPG">
+		<img src="image/3.JPG">
+		<img src="image/4.JPG">
+		<img src="image/5.JPG">
+		<img src="image/6.JPG">
+		<img src="image/7.JPG">
+	</div>
+</body>
+</html>
+
+<!--本html文件实现鼠标移过改变图片src效果，实现比较简单。
+	以下是实现图片加载时显示loading图效果，实现原理：在body中的img[0]后加一个空的div块，该div块中放的是loading图，通过改变其display实现效果。其部分js代码：
+
+			var img = new Image();
+			img.src = oImg[0].src = this.src; //断点1
+            //显示loading图
+            oDiv.style.display = "block";
+            console.log("转圈");
+            // 如果这个src的img已经缓存到浏览器中,则在断点1的时候肯定就显示了大图了，这时候只需要隐藏Loading图就好。步骤是:(先显示大图,再显示圆圈，再显示大图)
+            if (img.complete) {
+                oDiv.style.display = "none";
+            } else {
+                //否则,在此大图加载完在让loading图消失
+                oImg[0].onload = function() {oDiv.style.display = "none"};
+            }
+            -->

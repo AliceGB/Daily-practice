@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		body,ul,li{padding: 0;margin: 0;list-style: none;}
+
+		#outer{width: 280px;height:410px;margin: 10px auto;padding: 14px;border: 3px solid #535053;background-color: #666666;border-style: groove;}
+		#screen{width: 260px;height: 80px;border: 2px solid grey;padding:8px;background-color: #E0E0E0;border-style: inset;text-align: right;font-size: 20px;}
+		#overText{position:absolute;top: 40px;width:275px;background-color: #E0E0E0;border:none;text-align: right;font-size: 16px;}
+
+		ul{position:relative;width:340px;margin: 0 0 2px 2px;}
+		ul li{width: 50px;height:38px;float: left;background-color: #FFCC99;font-size: 24px;text-align:center;line-height:38px;margin: 17px 17px 0 0;border-radius: 5px;border-style: groove;cursor: pointer;}
+
+		.key{font-size: 14px;}
+		#equal{height: 96px;line-height: 96px;}
+		#zero{width: 123px;position: absolute;top: 242px;}
+		#dot{position: absolute;top: 242px;left: 146px;}
+	</style>
+	<script type="text/javascript">
+		window.onload=function()
+		{
+			var oUl=document.getElementById("keyboard").getElementsByTagName("ul");
+			var oTxt=document.getElementById("screen");
+			var oOTxt=document.getElementById("overText");
+
+			var oBtn1=getByClass(oUl,"btn_1");
+			var oBtn2=getByClass(oUl,"btn_2");
+			var oKey=getByClass(oUl,"key");
+
+			var a=true;
+
+			//开关按键
+			oKey[0].onclick=function()
+			{	
+				if(a)
+				{
+					oOTxt.value="";
+					oTxt.value="";
+					a=false;
+				}
+				else
+				{
+					oOTxt.value="";
+					oTxt.value="0";
+					a=true;
+				}
+			}
+			
+			//数字按键
+			for(var i=0;i<oBtn1.length;i++)
+			{
+				if(a)
+				{
+					oBtn1[i].index=i;
+					oBtn1[i].onclick=function()
+					{
+						var oNum=oBtn1[this.index].getElementsByTagName("strong")[0].innerHTML;
+					
+						if(Number(oTxt.value) && oTxt.value!="0")
+						{
+							oTxt.value+=oNum;
+						}
+						else
+						{
+							oTxt.value=oNum;
+						}
+					}
+				}
+			}
+
+			//功能按键
+			for(var j=0;j<oBtn2.length;j++)
+			{
+				if(a)
+				{
+					oBtn2[j].index=j;
+					oBtn2[j].onclick=function()
+					{ 
+						var oNum2=oBtn2[this.index].getElementsByTagName("strong")[0].innerHTML;
+
+						switch(oNum2)
+						{
+							case "C":
+								oOTxt.value="";
+								oTxt.value="0";
+								break;
+							case "/":
+								oOTxt.value+=oTxt.value+"/";
+								oTxt.value="/";
+								break;
+							case "*":
+								oOTxt.value+=oTxt.value+"*";
+								oTxt.value="*";
+								break;
+							case "-":
+								oOTxt.value+=oTxt.value+"-";
+								oTxt.value="-";
+								break;
+							case "+":
+								oOTxt.value+=oTxt.value+"+";
+								oTxt.value="+";
+								break;
+							case "=":
+								oOTxt.value=oOTxt.value;
+								
+								break;
+						}
+					}
+				}
+			}
+		}
+
+		//根据className获取元素
+		function getByClass(oParent,sClass)
+		{
+			var aEle=document.getElementsByTagName("*");
+			var aResult=[];
+
+			for(var i=0;i<aEle.length;i++)
+			{
+				if(aEle[i].className==sClass)
+				{
+					aResult.push(aEle[i]);
+				}
+			}
+
+			return aResult;
+		}
+
+	</script>
+</head>
+<body>
+	<div id="outer">
+		<input type="text" id="overText" />
+		<input type="text" id="screen" />
+		<div id="keyboard">
+			<ul>
+				<li class="btn_2"><strong>C</strong></li>
+				<li class="btn_2"><strong>/</strong></li>
+				<li class="btn_2"><strong>*</strong></li>
+				<li class="key"><strong>ON/OFF</strong></li>
+				<li class="btn_1"><strong>7</strong></li>
+				<li class="btn_1"><strong>8</strong></li>
+				<li class="btn_1"><strong>9</strong></li>
+				<li class="btn_2"><strong>-</strong></li>
+				<li class="btn_1"><strong>4</strong></li>
+				<li class="btn_1"><strong>5</strong></li>
+				<li class="btn_1"><strong>6</strong></li>
+				<li class="btn_2"><strong>+</strong></li>
+				<li class="btn_1"><strong>1</strong></li>
+				<li class="btn_1"><strong>2</strong></li>
+				<li class="btn_1"><strong>3</strong></li>
+				<li class="btn_2" id="equal"><strong>=</strong></li>
+				<li class="btn_1" id="zero"><strong>0</strong></li>
+				<li class="btn_1" id="dot"><strong>.</strong></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

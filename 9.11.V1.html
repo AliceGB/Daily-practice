@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>用parseInt解析数字并求和</title>
+	<style type="text/css">
+		input{width: 35px;}
+	</style>
+	<script type="text/javascript">
+		window.onload=function()
+		{
+			var oInt=document.getElementsByTagName("input");
+			var oSpan=document.getElementsByTagName("span")[0];
+			var oBtn=document.getElementsByTagName("button")[0];
+
+			//限制输入框只能输入整数
+			for (i = 0; i < oInt.length; i++)
+			{
+				oInt[i].onkeyup = function ()
+				{
+					this.value = this.value.replace(/[^\d]/,"")
+				}	
+			}
+			
+			oBtn.onclick=function()
+			{
+				(oInt[0].value==""||oInt[1].value=="") ? alert("请输入数字") : oSpan.innerHTML=parseInt(oInt[0].value)+parseInt(oInt[1].value);
+			}
+		}
+	</script>
+</head>
+<body>
+<input type="text" name="num1" />
++
+<input type="text" name="num2" />
+=
+<span>?</span>
+<button>求和</button>
+</body>
+</html>

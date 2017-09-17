@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>单一按钮显示/隐藏</title>
+	<style type="text/css">
+		body,ul,li,a{padding:0;margin:0;list-style: none;}
+		#outer{width: 220px;margin:10px auto;border: 1px solid grey;}
+		h2{background-color: #999999;border: 1px solid #996666;margin:1px 0;font-size: 22px;padding: 5px;cursor: pointer;}
+		#outer ul{background-color: #CCCCCC;display: none;}
+		#outer ul li{padding: 10px;}
+		#outer ul li a{font-size: 14px;color: grey;margin-top: 10px;text-decoration: none;}
+		#outer ul li:hover{background-color: white;text-decoration: underline;}
+	</style>
+
+	<script type="text/javascript">
+		window.onload=function()
+		{
+			var oH2=document.getElementById("outer").getElementsByTagName("h2")[0];
+			var oUl=document.getElementById("outer").getElementsByTagName("ul")[0];
+
+			oH2.onclick=function()
+			{
+				oUl.style.display=="none"?oUl.style.display="block":oUl.style.display="none";
+			}
+
+		}
+	</script>
+</head>
+<body>
+	<div id="outer">
+		<h2>播放列表...</h2>
+		<ul>
+			<li>
+				<a href="http://bd.kuwo.cn/yinyue/4759974" target="_blank">剑伤-李易峰</a>
+			</li>
+			<li>
+				<a href="http://bd.kuwo.cn/yinyue/6725772" target="_blank">请跟我联络-李易峰</a>
+			</li>
+			<li>
+				<a href="http://www.kuwo.cn/yinyue/28033037?catalog=yueku2016" target="_blank">上玄之月-萧忆情</a>
+			</li>
+			<li>
+				<a href="http://www.kuwo.cn/yinyue/22833435?catalog=yueku2016" target="_blank">告白气球-伦桑</a>
+			</li>
+			<li>
+				<a href="http://www.kuwo.cn/yinyue/6664922?catalog=yueku2016" target="_blank">权御天下-小魂&&伦桑</a>
+			</li>
+			<li>
+				<a href="http://www.kuwo.cn/yinyue/14265990?catalog=yueku2016" target="_blank">我的天空-伦桑</a>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
+
+<!--源代码实现时有这一句：background:#ced3d7 url(img/ico.gif) 180px 15px no-repeat;背景图片就是背景图标。至于鼠标点击时背景图标上下翻转，则是这一句：#outer h2.open{background-position:180px -12px;}
+点击时在js中为css添加classname就好-->
+<!--存在一个问题：在IE中点击时，第一次点击h2没有反应，之后的每次点击都没有问题？？？-->

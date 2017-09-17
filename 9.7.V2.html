@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>理解absolute</title>
+<style type="text/css">
+		#div1{width: 200px;height: 200px;background-color: red;position:absolute;top: 20px;left:20px;z-index: -1;}
+		#div2{width: 200px;height: 200px;background-color: yellow;top: 20px;left: 20px;}
+		#div3{width: 200px;height: 200px;background-color: blue;position:relative;top: 30px;left: 30px;}
+		#div4{width: 200px;height: 200px;background-color: grey;top: 20px;left: 20px;}
+		#div5{position:absolute;width: 200px;height: 200px;background-color:pink;top: 40px;left: 40px;}
+		#div6{position:relative;width: 200px;height: 200px;background-color: purple;top: 20px;left: 20px;}
+		#div7{position:absolute;width: 200px;height: 200px;background-color: green;top: 20px;left: 20px;}
+	</style>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<div id="div3"></div>
+	
+	<div id="div4">
+		<div id="div5"></div>
+	</div>
+	<div id="div6">
+		<div id="div7"></div>
+	</div>
+</body>
+</html>
+
+<!--回顾html css基础知识之absolute和z-index属性.
+	将div1设置为position:absolute;可以明显看到与position：relative时不同，
+
+	！！元素不再保留原来位置，元素本身高度、宽度塌陷。！！
+
+	如果在设置了position：absolute的基础上，再设置z-index属性，可以实现元素层级（叠加）效果
+
+	根据父元素div4与子元素div5，父元素div6与子元素div7可知：
+	父元素未设置relative时，div5相对于body进行定位；
+	父元素设置position:relative后，子元素相对于父元素定位偏移-->

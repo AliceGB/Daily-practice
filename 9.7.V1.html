@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>理解relative</title>
+	<style type="text/css">
+		#div1{width: 200px;height: 200px;background-color: red;position:relative;top: 10px;left: 10px;}
+		#div2{width: 200px;height: 200px;background-color: yellow;top: 20px;left: 20px;}
+		#div3{width: 200px;height: 200px;background-color: blue;position:relative;top: 30px;left: 30px;z-index: -2;}
+		#div4{width: 200px;height: 200px;background-color: grey;top: 20px;left: 20px;}
+	</style>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<div id="div3"></div>
+	<div id="div4"></div>
+</body>
+</html>
+
+<!--回顾html css基础知识之relative和z-index属性。
+	可以清楚理解relative：实现元素偏移且保留其原来位置。
+	如果在设置了position：relative的基础上，再设置z-index属性，可以实现元素层级（叠加）效果-->

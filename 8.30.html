@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>弹出层效果</title>
+
+	<style type="text/css">
+		html,body{width:100%;height: 100%;overflow: hidden;}
+		body,button,div{padding:0;margin:0;}
+		button{cursor: pointer;margin-top: 10px;}
+
+		#overlay{/*作为goout的同辈元素，作用是避免opacity属性的继承问题*/
+			position: absolute;/*不可缺少*/
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			background-color: #000000; 
+			opacity: 0.5;filter: Alpha(opacity=50);/*设置透明度为0.5*/
+			display:none;
+		}
+
+		#goOut{
+			position:absolute;/*不可缺少*/
+			width:350px;
+			height:200px;
+			left:50%;
+			top:50%;    /*通过left和top实现的定位是针对整个模块而言，这两个参数确定的其实是模块左上角的位置*/
+			margin:-103px 0 0 -178px;  /*通过设置margin值实现理想的模块居中，模块的中心点此时与页面中心点重合*/
+			background-color: #FF99FF;
+			border:3px solid #CC9966;
+			display:none;
+		}
+
+		#close{
+			width: 344px;
+			height: 30px;
+			background-color: #FF9999;
+			border: 3px solid #CC9966;
+			text-align: right; /*通过text-align设置内容的位置*/
+		}
+
+		#close span{
+			width:15px;
+			height:15px;
+			background-color: #FFFFFF;
+			border: 1px solid #CC9966;
+			text-align: center;
+			margin:5px;
+			float: right;
+			line-height: 15px; 
+			/*将line-height与height设置为相同值，实现竖直方向居中*/
+			cursor: pointer;
+		}
+	</style>
+
+	<script type="text/javascript">
+		window.onload=function(){
+			var oBtn=document.getElementsByTagName("button")[0];
+			var oLay=document.getElementById("overlay");
+			var oOut=document.getElementById("goOut");
+			var oClo=document.getElementById("close");
+
+			oBtn.onclick=function(){
+				oOut.style.display="block";
+				oLay.style.display="block";
+			}
+
+			oClo.onclick=function(){
+				oOut.style.display="none";
+				oLay.style.display="none";
+			}
+		}
+	</script>
+</head>
+<body>
+	<center><button>弹出层</button></center>
+	<!--center标签，html5标签，作用是使水平居中-->
+	<div id="overlay"></div>
+	<!--空的div，作用是解决opacity属性的透明度继承问题，为goOut的同辈元素，position：absolute-->
+	<div id="goOut">
+	<div id="close"><span>x</span></div>
+	<!--记住：给元素加单独样式，别忘了可以使用span标签-->
+	</div>
+</body>
+</html>
+
+<!--此文档实现弹出层效果，js代码较为简单，重点在于掌握新的css3知识，即opacity属性-设置透明度,以及学会进一步灵活应用css相关知识-->

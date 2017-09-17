@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>简易JS年历</title>
+
+	<style type="text/css">
+		body,ul,li{margin: 0;padding: 0;list-style: none;}
+		#outer{width: 240px;margin:10px auto;padding:5px;background-color: #999966;border: 1px solid #999966;}
+
+		#outer ul{width:240px;height: 180px;overflow: hidden;}
+		#outer ul li{width: 50px;height: 50px;border: 1px solid black;background-color: black;margin: 4px;float: left;font-size:14px;color: white;text-align: center;cursor: pointer;}
+		#outer ul li strong{display: block;font-size: 24px;margin-top: 3px;}
+		#outer ul li:hover{background-color: white;color: #CC66CC;}
+
+		#content{width: 226px;margin:5px auto;background-color: #CCCC99;padding:3px;font-size: 16px;}
+		#content span{display:block;font-size: 18px;padding: 3px;}
+	</style>
+
+	<script type="text/javascript">
+		window.onload=function(){
+			var oLi=document.getElementsByTagName("li");
+			var oCon=document.getElementById("content");
+			var oFest=[
+						"元旦：1月1日至3日放假三天",
+						"春节：2月2日至8日放假7天",
+						"妇女节：3月8日妇女节，与我无关",
+						"清明节：4月3日至5日放假3天",
+						"劳动节：4月30日至5月2日放假3天",
+						"端午节：6月4日至6日放假3天",
+						"小暑：7月7日小暑,不放假",
+						"七夕节：8月6日七夕节,不放假",
+						"中秋节：9月10日至12日放假3天",
+						"国庆节：10月1日至7日放假7天",
+						"立冬：11月8日立冬,不放假",
+						"艾滋病日:12月1日<br />废除奴隶制国际日:12月2日"
+					]
+
+			for(var i=0;i<oLi.length;i++)
+			{				
+				oLi[i].index=i;
+				oLi[i].onmouseover=function()
+				{
+					//问题1：源码中在li中添加class=“current”，在js中添加这段，没有添加这些也一样可以实现效果，按照我自己的实现方式会有什么隐患么？
+					//for(var n = 0; n < oLi.length; n++) 
+					//{
+						//oLi[n].className = "";
+						//this.className = "current";
+					//}
+						
+					var oInner=null;
+					oInner="<span>"+(this.index+1)+"月节日</span>"+oFest[this.index];
+					oCon.innerHTML=oInner;
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="outer">
+		<ul>
+			<li><strong>1</strong>JAN</li>
+			<li><strong>2</strong>FEB</li>
+			<li><strong>3</strong>MAR</li>
+			<li><strong>4</strong>APR</li>
+			<li><strong>5</strong>MAY</li>
+			<li><strong>6</strong>JUN</li>
+			<li><strong>7</strong>JUL</li>
+			<li><strong>8</strong>AUG</li>
+			<li><strong>9</strong>SEP</li>
+			<li><strong>10</strong>OTC</li>
+			<li><strong>11</strong>NOV</li>
+			<li><strong>12</strong>DEC</li>
+		</ul>
+		<div id="content">
+			<span>1月节日</span>
+			元旦：1月1日至3日放假三天.
+		</div>
+	</div>
+</body>
+</html>
+
+<!--本文档实现简易日历，主要原理是通过JS改变部分html代码，达到修改div中显示内容的目的-->

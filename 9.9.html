@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>选项卡：全选、全不选、反选</title>
+	<style type="text/css">
+		body{font-family:Tahoma;}
+		a{text-decoration: none;margin:0;padding:0;}
+		div{width: 145px;border: 1px solid black;margin:10px auto;font-size: 20px;padding: 10px;}
+		p{display:inline-block;margin:3px auto;border-bottom: 1px solid grey;padding-bottom: 5px;}
+		input{padding:10px;margin:10px;}
+		center{font-size: 12px;}
+	</style>
+
+	<script type="text/javascript">
+		window.onload=function()
+		{
+			var oInt=document.getElementsByTagName('input');
+			var oA=document.getElementsByTagName('a')[0];
+			var oSpan=document.getElementsByTagName('span')[0];
+			var oInt0=oInt[0];
+
+			//判断十个选项是否全选，若全选，更改文字和选择状态。
+			function isAllSelect()
+			{
+				var j=0;
+
+				for(var i=1;i<oInt.length;i++)
+				{	
+					if(oInt[i].checked)
+					{
+						j++;
+					}
+				}
+
+				if(j!=10)
+				{
+					oInt0.checked='';
+					oSpan.innerHTML='全选';		
+				}
+				else
+				{
+					oInt0.checked='checked';
+					oSpan.innerHTML="全不选";
+				}
+			}
+
+			/*源码判断函数
+			
+			 var isCheckAll = function ()
+			{
+				for (var i = 1, n = 0; i < oInput.length; i++)
+				{
+					//这个就是记住选中的checkbox的个数，如果左边的oInput[i].checked为true，才会执行后边的n++;如果左边的oInput[i].checked为false，则不换执行n++;逻辑运算符经常起到短路的作用，||或逻辑运算符，如果前边的值为真，即true，那么就不管后边的值是真是假，都返回真，对后边的值不进行检查，直接跳过执行下一条语句。&&与逻辑运算符，如果前边的值为假，即false,那么不管后边的值为真还是假，都返回假，对后边的值不进行检查，直接跳过执行下一条语句。
+
+					oInput[i].checked && n++	
+				}
+
+				//注意运算符的优先级，后边的判断条件成立才会执行前边的赋值操作，给后边加个括号会更为简洁明了。
+				oInput[0].checked = n == oInput.length - 1;
+
+				oLabel.innerHTML = oInput[0].checked ? "全不选" : "全选"
+			};*/
+
+
+			//反选功能
+			oA.onclick=function()
+			{
+				for(var i=1;i<oInt.length;i++)
+				{
+					//源码实现：oInput[i].checked = !oInput[i].checked
+					//这一句明显比我自己的代码更为简洁
+					if(oInt[i].checked)
+					{
+						oInt[i].checked='';
+					}
+					else
+					{	
+						oInt[i].checked='checked';
+					}
+				}
+
+				isAllSelect()
+			};
+
+			//全选、全不选功能
+			oInt0.onclick=function()
+			{	
+				if(oInt0.checked)
+				{
+					oSpan.innerHTML="全不选";
+
+					for(var i=0;i<oInt.length;i++)
+					{
+						oInt[i].checked='checked';
+					}
+				}
+				else
+				{
+					oSpan.innerHTML="全选";
+
+					for(var i=0;i<oInt.length;i++)
+					{
+						oInt[i].checked='';
+					}
+				}
+			}
+
+			//判断，当十个选项全选（不是通过反选操作）时，更改文字和选择状态。
+			for(var i=1;i<oInt.length;i++)
+			{
+				oInt[i].onclick=function()
+				{
+					isAllSelect();
+				}
+
+			}	
+
+		}
+	</script>
+</head>
+<body>
+	<div>
+		<p><input type="checkbox" /><span>全选</span> <a href="javascript:;">反选</a></p>
+		<input type="checkbox" />选项（1）
+		<input type="checkbox" />选项（2）
+		<input type="checkbox" />选项（3）	
+		<input type="checkbox" />选项（4）	
+		<input type="checkbox" />选项（5）	
+		<input type="checkbox" />选项（6）	
+		<input type="checkbox" />选项（7）	
+		<input type="checkbox" />选项（8）	
+		<input type="checkbox" />选项（9）	
+		<input type="checkbox" />选项（10）	
+	</div>
+	<center>1、切换全选/全不选文字；2、根据选中个数更新全选框状态；</center>
+
+</body>
+</html>
+
+<!--本文档是选项卡，功能主要有全选、全不选、反选等等，看似简单，但实现过程中出现了很多问题。
+	问题1：FF浏览器中打开调试，出现Uncaught SyntaxError: Unexpected token 的错误提醒？
+	解决：百度了一下，出现该错误的原因有很多，最后发现错误是函数末尾的';'是在中文状态下输入的‘；’，这个错误肉眼很难发现，因此要善于使用浏览器作为调试工具。
+
+	问题2：写判断函数时，感觉代码无误，但效果出不来？
+	解决：这个问题写该文档时对我造成很大的困扰，最后经过多次测试，搞清楚了问题出现在判断条件上，对某一个复选框点击时，oInt[i].checked的值，取的是点击后复选框的状态，而不是点击前状态！
+
+	问题3：html文件在IE中打开时文字全部为乱码？
+	解决：添加一句<meta charset="utf-8">即可解决，注意代码兼容性。
+
+	收获：1.看似简单的小效果，其中需要注意的点非常非常多，一定要多动手多实践，不能光靠想。
+		2.代码出现问题是正常现象，要学会使用alert和浏览器调试工具进行调试
+		3.加油！多思考多尝试，你也可以的！-->
